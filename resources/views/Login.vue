@@ -29,6 +29,7 @@
                         placeholder=""
                         v-model="password"
                         type="password"
+                        @input="validatePassword"
                         class="peer h-full w-full rounded-md border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-black focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                     />
                     <label
@@ -36,6 +37,10 @@
                     >
                         Contraseña
                     </label>
+                    <!-- Mensaje de error -->
+                        <p v-if="passwordError" class="text-red-500 text-sm mt-1">
+                        {{ passwordError }}
+                        </p>
                 </div>
             </div>
             <div class="p-6 pt-0">
@@ -69,12 +74,12 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from 'vuex';
  
-let user = ref("");
-let password = ref("");
+let user = ref("danielM@gmail.com");
+let password = ref("12345678");
 let router = useRouter();
 let loading = ref(false);
 const store = useStore();
-
+let passwordError = ref("")
 
 async function validar() {
     try {
@@ -97,6 +102,11 @@ async function validar() {
     }
 }
 
+function validatePassword() {
+  passwordError.value =
+    password.value.length < 8 ? 'La contraseña debe tener al menos 8 caracteres.' : ''
+}
+
 function clean(){
     user.value= "",
     password.value= ""
@@ -106,3 +116,4 @@ function pasarHome() {
     router.push("/home");
 }
 </script>
+<a href=""></a>

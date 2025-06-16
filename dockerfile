@@ -33,12 +33,15 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 RUN npm install && npm run build
 
+# ✅ Copiar .env.example como .env
+RUN cp .env.example .env
+
+# Generar la clave de Laravel
+RUN php artisan key:generate
+
 # Permisos
 RUN chown -R www-data:www-data /var/www
 RUN chmod -R 755 /var/www
-
-# Generar la clave
-RUN php artisan key:generate
 
 # Exponer el puerto
 EXPOSE 8000

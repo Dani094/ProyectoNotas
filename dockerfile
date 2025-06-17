@@ -43,7 +43,7 @@ RUN chown -R www-data:www-data /var/www && \
     chmod -R 755 /var/www
 
 # Exponer puerto
-EXPOSE 8000
+EXPOSE 8080
 
 # Servidor Laravel (no recomendado en producción real, pero útil para Render simple)
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
